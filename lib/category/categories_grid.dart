@@ -4,37 +4,44 @@ import 'package:news/category/category_item.dart';
 import 'package:news/category/category_model.dart';
 
 class CategoriesGrid extends StatelessWidget {
-  const CategoriesGrid({super.key});
+  const CategoriesGrid({super.key, required this.onCategorySelected});
+  final Function(CategoryModel) onCategorySelected;
 
   @override
   Widget build(BuildContext context) {
     const List<CategoryModel> categories = [
       CategoryModel(
+        id: 'sports',
         name: 'Sports',
         imageName: 'ball',
         color: AppTheme.red,
       ),
       CategoryModel(
+        id: 'Politics',
         name: 'Politics',
         imageName: 'Politics',
         color: AppTheme.darkBlue,
       ),
       CategoryModel(
+        id: 'health',
         name: 'Health',
         imageName: 'health',
         color: AppTheme.pink,
       ),
       CategoryModel(
+        id: 'bussines',
         name: 'Bussines',
         imageName: 'bussines',
         color: AppTheme.brown,
       ),
       CategoryModel(
+        id: 'environment',
         name: 'Environment',
         imageName: 'environment',
         color: AppTheme.lightBlue,
       ),
       CategoryModel(
+        id: 'science',
         name: 'Science',
         imageName: 'science',
         color: AppTheme.yellow,
@@ -61,17 +68,24 @@ class CategoriesGrid extends StatelessWidget {
           ),
           Expanded(
             child: GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 24,
-                mainAxisSpacing: 24,
-              ),
-              itemCount: categories.length,
-              itemBuilder: (_, index) => CategoryItem(
-                category: categories[index],
-                index: index,
-              ),
-            ),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 24,
+                  mainAxisSpacing: 24,
+                ),
+                itemCount: categories.length,
+                itemBuilder: (_, index) {
+                  final category = categories[index];
+                  return GestureDetector(
+                    onTap: () {
+                      onCategorySelected(category);
+                    },
+                    child: CategoryItem(
+                      category: category,
+                      index: index,
+                    ),
+                  );
+                }),
           ),
         ],
       ),
