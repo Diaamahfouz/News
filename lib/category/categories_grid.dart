@@ -17,9 +17,9 @@ class CategoriesGrid extends StatelessWidget {
         color: AppTheme.red,
       ),
       CategoryModel(
-        id: 'Politics',
-        name: 'Politics',
-        imageName: 'Politics',
+        id: 'technology',
+        name: 'Technology',
+        imageName: 'tech',
         color: AppTheme.darkBlue,
       ),
       CategoryModel(
@@ -29,15 +29,15 @@ class CategoriesGrid extends StatelessWidget {
         color: AppTheme.pink,
       ),
       CategoryModel(
-        id: 'bussines',
+        id: 'business',
         name: 'Bussines',
         imageName: 'bussines',
         color: AppTheme.brown,
       ),
       CategoryModel(
-        id: 'environment',
-        name: 'Environment',
-        imageName: 'environment',
+        id: 'entertainment',
+        name: 'Entertainment',
+        imageName: 'entertainment',
         color: AppTheme.lightBlue,
       ),
       CategoryModel(
@@ -70,8 +70,8 @@ class CategoriesGrid extends StatelessWidget {
             child: GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  crossAxisSpacing: 24,
-                  mainAxisSpacing: 24,
+                  crossAxisSpacing: 25,
+                  mainAxisSpacing: 25,
                 ),
                 itemCount: categories.length,
                 itemBuilder: (_, index) {

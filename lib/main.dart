@@ -21,3 +21,4 @@ class News extends StatelessWidget {
     );
   }
 }
+

@@ -23,9 +23,12 @@ class CategoryItem extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset(
-            'assets/images/${category.imageName}.png',
-            height: MediaQuery.of(context).size.height * 0.12,
+          ClipRRect(
+            borderRadius: const BorderRadius.all(Radius.circular(20)),
+            child: Image.asset(
+              'assets/images/${category.imageName}.png',
+              height: MediaQuery.of(context).size.height * 0.12,
+            ),
           ),
           Text(
             category.name,
