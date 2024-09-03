@@ -24,7 +24,7 @@ class CategoryItem extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           ClipRRect(
-            borderRadius: const BorderRadius.all(Radius.circular(20)),
+            borderRadius: const BorderRadius.all(Radius.circular(25)),
             child: Image.asset(
               'assets/images/${category.imageName}.png',
               height: MediaQuery.of(context).size.height * 0.12,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news/app_theme.dart';
 import 'package:news/home_screen.dart';
+import 'package:news/views/item_selected.dart';
 
 void main() {
   runApp(const News());
@@ -15,10 +16,10 @@ class News extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: {
         HomeScreen.routeName: (_) => const HomeScreen(),
+        ItemSelected.routeName: (_) => const ItemSelected(),
       },
       theme: AppTheme.lightTheme,
       themeMode: ThemeMode.light,
     );
   }
 }
-

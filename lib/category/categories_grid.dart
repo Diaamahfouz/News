@@ -37,7 +37,7 @@ class CategoriesGrid extends StatelessWidget {
       CategoryModel(
         id: 'entertainment',
         name: 'Entertainment',
-        imageName: 'entertainment',
+        imageName: 'environment',
         color: AppTheme.lightBlue,
       ),
       CategoryModel(
