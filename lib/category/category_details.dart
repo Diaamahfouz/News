@@ -6,8 +6,9 @@ import 'package:news/widgets/error_indicator.dart';
 import 'package:news/widgets/loading_indicator.dart';
 
 class CategoryDetails extends StatelessWidget {
-  const CategoryDetails(this.categoryId, {super.key});
+  const CategoryDetails(this.categoryId, {this.query, super.key});
   final String categoryId;
+  final String? query;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,10 @@ class CategoryDetails extends StatelessWidget {
           return const ErrorIndicator();
         } else {
           final sources = snapshot.data?.sources ?? [];
-          return SourcesTabs(sources);
+          return SourcesTabs(
+            sources,
+            query: query,
+          );
         }
       },
     );

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
 import 'package:news/app_theme.dart';
 import 'package:news/category/categories_grid.dart';
 import 'package:news/category/category_details.dart';
@@ -37,11 +37,16 @@ class _HomeScreenState extends State<HomeScreen> {
           )),
       child: Scaffold(
         appBar: isSearching ? searchAppBar() : appBar(),
-        drawer: HomeDrawer(
-          onItemSelected: onDrawerItemSelected,
-        ),
+        drawer: isSearching
+            ? null
+            : HomeDrawer(
+                onItemSelected: onDrawerItemSelected,
+              ),
         body: selectedCategory != null
-            ? CategoryDetails(selectedCategory!.id)
+            ? CategoryDetails(
+                selectedCategory!.id,
+                query: searchController.text,
+              )
             : selectedDrawerItem == DrawerItem.categories
                 ? CategoriesGrid(onCategorySelected: onCategorySelected)
                 : const SettingsTab(),
@@ -66,57 +71,76 @@ class _HomeScreenState extends State<HomeScreen> {
 
   searchAppBar() {
     return AppBar(
-      title: TextField(
+      title: TextFormField(
         controller: searchController,
-        style: const TextStyle(color: AppTheme.white),
+        style: const TextStyle(
+            color: AppTheme.black, fontSize: 16, fontWeight: FontWeight.w400),
         cursorColor: AppTheme.white,
-        decoration: const InputDecoration(
-          hintText: "Search",
-          hintStyle: TextStyle(color: AppTheme.grey),
-          enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.transparent),
+        decoration: InputDecoration(
+          filled: true,
+          fillColor: AppTheme.white,
+          focusColor: AppTheme.black,
+          hintText: "Search Article",
+          hintStyle: const TextStyle(
+            color: Color(0xff39A552),
+            fontSize: 17,
+            fontWeight: FontWeight.w400,
           ),
-          focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.transparent),
+          enabledBorder: const UnderlineInputBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(30),
+            ),
+          ),
+          focusedBorder: const UnderlineInputBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(22),
+            ),
+          ),
+          suffixIcon: IconButton(
+            icon: const Icon(
+              Icons.search,
+              color: AppTheme.primary,
+              size: 32,
+            ),
+            onPressed: () {
+              setState(() {});
+            },
+          ),
+          prefixIcon: IconButton(
+            icon: const Icon(
+              Icons.close,
+              color: AppTheme.primary,
+              size: 28,
+            ),
+            onPressed: () {
+              isSearching = false;
+              searchController.clear();
+              setState(() {});
+            },
           ),
         ),
       ),
-      leading: IconButton(
-        icon: const Icon(Icons.arrow_back),
-        onPressed: () {
-          setState(() {
-            isSearching = false;
-            searchTerm = null;
-            searchController.text = "";
-          });
-        },
-      ),
-      actions: [
-        IconButton(
-          onPressed: () {
-            setState(() {
-              searchTerm = searchController.text;
-            });
-          },
-          icon: const Icon(Icons.search),
-        )
-      ],
     );
   }
 
   appBar() {
     return AppBar(
       title: const Text('News App'),
-      actions: [
-        IconButton(
-          onPressed: () {
-            setState(() {
-              isSearching = true;
-            });
-          },
-          icon: const Icon(Icons.search),
-        )
-      ],
+      actions: selectedCategory != null
+          ? [
+              IconButton(
+                onPressed: () {
+                  setState(() {
+                    isSearching = true;
+                  });
+                },
+                icon: const Icon(
+                  Icons.search,
+                  size: 36,
+                ),
+              )
+            ]
+          : null,
     );
   }
 }
