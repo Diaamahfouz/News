@@ -20,13 +20,17 @@ class ApiService {
     return SourcesResponse.fromJson(json);
   }
 
-  static Future<NewsResponse> getNews(String sourceId) async {
+  static Future<NewsResponse> getNews(
+      String sourceId, int page, int pageSize) async {
     final uri = Uri.https(
       ApiConstants.baseUrl,
       ApiConstants.newsEndpoint,
       {
         'apiKey': ApiConstants.apiKey,
         'sources': sourceId,
+        // 'q':searchTerm,
+        'page': page.toString(),
+        'pageSize': pageSize.toString(),
       },
     );
     final response = await http.get(uri);
