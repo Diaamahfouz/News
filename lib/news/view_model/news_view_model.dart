@@ -1,25 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:news/news/data/data_source/news_data_source.dart';
 import 'package:news/news/data/models/news.dart';
-
+import 'package:news/news/data/repository/news_repository.dart';
+import 'package:news/shared/service_locator.dart';
 class NewsViewModel with ChangeNotifier {
-  final dataSource = NewsDataSource();
+  final NewsRepository repository;
+  NewsViewModel(): repository =NewsRepository(ServiceLocator.newsDataSource);
+  
   List<News> newsList = [];
-
 
   bool isLoading = false;
   String? errorMessage;
-  Future<void> getNews(String sourceId, int page,String? query) async {
+  Future<void> getNews(String sourceId, int page, String? query) async {
     isLoading = true;
     notifyListeners();
     try {
-      final response = await dataSource.getNews(sourceId, 1, query);
-      if (response.status == 'ok' && response.news != null) {
-     
-        newsList = response.news!;
-      } else {
-        errorMessage = 'no news available';
-      }
+      newsList = await repository.getNews(sourceId, 1, query);
     } catch (error) {
       errorMessage = error.toString();
     }
