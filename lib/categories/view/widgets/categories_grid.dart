@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:news/app_theme.dart';
-import 'package:news/category/category_item.dart';
-import 'package:news/category/category_model.dart';
+import 'package:news/shared/app_theme.dart';
+import 'package:news/categories/view/widgets/category_item.dart';
+import 'package:news/categories/data/models/category_model.dart';
 
 class CategoriesGrid extends StatelessWidget {
   const CategoriesGrid({super.key, required this.onCategorySelected});
@@ -37,7 +37,7 @@ class CategoriesGrid extends StatelessWidget {
       CategoryModel(
         id: 'entertainment',
         name: 'Entertainment',
-        imageName: 'environment',
+        imageName: 'entertainment',
         color: AppTheme.lightBlue,
       ),
       CategoryModel(

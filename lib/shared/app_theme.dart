@@ -21,8 +21,8 @@ class AppTheme {
       foregroundColor: white,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.horizontal(
-          left: Radius.circular(32),
-          right: Radius.circular(32),
+          left: Radius.circular(22),
+          right: Radius.circular(22),
         ),
       ),
       titleTextStyle: TextStyle(

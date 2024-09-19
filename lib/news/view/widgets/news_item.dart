@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:news/app_theme.dart';
-import 'package:news/models/news_response/news.dart';
+import 'package:news/shared/app_theme.dart';
+import 'package:news/news/data/models/news.dart';
+import 'package:news/shared/widgets/loading_indicator.dart';
 import 'package:news/views/item_selected.dart';
-
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class NewsItem extends StatelessWidget {
@@ -28,11 +29,12 @@ class NewsItem extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: const BorderRadius.all(Radius.circular(5)),
-              child: Image.network(
-                news.urlToImage ??
+              child: CachedNetworkImage(
+                imageUrl:  news.urlToImage ??
                     'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg',
                 height: MediaQuery.of(context).size.height * 0.25,
                 width: double.infinity,
+                placeholder: (context, url) => const LoadingIndicator(),
                 fit: BoxFit.fill,
               ),
             ),
